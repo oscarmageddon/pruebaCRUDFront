@@ -1,0 +1,21 @@
+<div class="row">
+    <div class="col"></div>
+    <div class="col">
+        <div class="row justify-content-md-center">
+
+            <h2>Gestion de Transaccion</h2>
+        </div>
+        <form>
+            <div class="mb-3">
+                <br><br>
+                <input type="text" name="nomUser" class="form-control" [(ngModel)]="nomUser" placeholder="Nombre..." /><br>
+                <input type="text" name="apeUser" class="form-control" [(ngModel)]="apeUser" placeholder="Apellido..." /><br>
+                <input type="text" name="dniUser" class="form-control" [(ngModel)]="dniUser" placeholder="Rut..." /><br>
+                <input type="text" name="payMethod" class="form-control" [(ngModel)]="payMethod" placeholder="Metodo de pago..." /><br>
+
+                <input type="button" value="Agregar" (click)="guardar()" class="btn btn-primary">
+            </div>
+        </form>
+    </div>
+    <div class="col"></div>
+</div>
