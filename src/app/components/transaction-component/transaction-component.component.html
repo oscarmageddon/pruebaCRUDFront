@@ -11,7 +11,6 @@
 
 
         <form>
-
             <div class="card">
                 <div class="card-body">
                     <div class="mb-3">
@@ -25,14 +24,14 @@
                         <input type="text" name="payMethod" class="form-control" [(ngModel)]="payMethod"
                             placeholder="Metodo de pago..." />
                         <br>
-                        <input type="button" value="Agregar" (click)="guardar()" class="btn btn-primary">
+                        <input type="button" style="margin: 10px" value="Agregar" (click)="guardar()" class="btn btn-primary">
+                        <input type="button" value="Buscar por Rut" (click)="buscarPorDni()" class="btn btn-primary">
                     </div>
                 </div>
             </div>
-
-
         </form>
-        <br>
+
+       <br>
         <div class="row mg-t-12 mg-b-12 mg-l-12 mg-b-10">
             <div class="col-lg-5">
                 <div class="search-box pull-left" style="width: 250px !important;">
@@ -65,7 +64,8 @@
             </thead>
             <tbody>
               <tr >
-			    <tr *ngFor="let item of transactions">
+            <!-- 			    
+                <tr *ngFor="let item of transactions">
                     <th scope="row" class="text-center">{{item.code}}</th>
                         <td class="text-center">{{item.nombre}}</td>
                         <td class="text-center">{{item.apellido}}</td>
@@ -74,10 +74,8 @@
                     
                     <th class="text-center" scope="col"><input type="button" value="Editar" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success"></th>
                     <th class="text-center" scope="col"><input type="button" value="Eliminar" class="btn btn-danger"></th>
-                </tr>
-
-                  
-
+                </tr> 
+            -->
 
             </tbody>
         </table>

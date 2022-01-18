@@ -16,4 +16,9 @@ export class TransactionService {
   saveTransaction(trx: Transaction): Observable<Transaction> {
     return this.http.post<Transaction>(`${ this.baseUrl }/`, trx);
   }
+
+  findTransactionByDni(dniUsr: String): Observable<Transaction> {
+    return this.http.get<Transaction>(`${ this.baseUrl }/dni/`+dniUsr);
+  }
+
 }
