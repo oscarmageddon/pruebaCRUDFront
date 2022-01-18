@@ -4,4 +4,5 @@ export interface Transaction {
     dniUsr: string;
     paymentMethod: string;
     estado?: string;
+    id?: number;
 }

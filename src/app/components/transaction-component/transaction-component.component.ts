@@ -15,11 +15,11 @@ export class TransactionComponentComponent implements OnInit {
   payMethod: string = '';
 
   trx: Transaction = {
-      nombreUsr: '',
-      apellidoUsr: '',
-      dniUsr: '',
-      paymentMethod: '',
-      estado: '1'
+    nombreUsr: '',
+    apellidoUsr: '',
+    dniUsr: '',
+    paymentMethod: '',
+    estado: '1'
   }
 
   constructor(private transactionService: TransactionService) { }
@@ -37,23 +37,41 @@ export class TransactionComponentComponent implements OnInit {
       estado: '1'
     }
 
-    this.transactionService.saveTransaction( this.trx )
-      .subscribe ( resp => {
+    this.transactionService.saveTransaction(this.trx)
+      .subscribe(resp => {
         console.log('Respuesta ', resp)
       })
   }
 
   buscarPorDni() {
 
-    this.transactionService.findTransactionByDni( this.dniUser )
-      .subscribe ( resp => {
+    this.transactionService.findTransactionByDni(this.dniUser)
+      .subscribe(resp => {
         console.log('Respuesta ', resp);
         this.nomUser = resp.nombreUsr;
         this.apeUser = resp.apellidoUsr;
         this.dniUser = resp.dniUsr;
         this.payMethod = resp.paymentMethod;
-      })
 
+        this.trx = {
+          nombreUsr: resp.nombreUsr,
+          apellidoUsr: resp.apellidoUsr,
+          dniUsr: resp.dniUsr,
+          paymentMethod: resp.paymentMethod,
+          estado: resp.estado,
+          id: resp.id
+        }
+      })
+  }
+
+  actualizarEstadoDni() {
+    if (this.trx.dniUsr !== '') {
+      this.trx.estado = this.trx.estado === '1' ? '0' : '1';
+      this.transactionService.updateStateByDni(this.trx)
+        .subscribe(resp => {
+          console.log('Updated: ', resp);
+        })
+    }
   }
 
 
