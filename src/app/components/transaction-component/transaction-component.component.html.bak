@@ -65,15 +65,18 @@
             </thead>
             <tbody>
               <tr >
-                    <th scope="row" class="text-center"></th>
-                        <td class="text-center"></td>
-                        <td class="text-center"></td>
-                        <td class="text-center"></td>
-                        <td class="text-center"></td>
-                        <td class="text-center"></td>
+			    <tr *ngFor="let item of transactions">
+                    <th scope="row" class="text-center">{{item.code}}</th>
+                        <td class="text-center">{{item.nombre}}</td>
+                        <td class="text-center">{{item.apellido}}</td>
+                        <td class="text-center">{{item.metodo}}</td>
+                        <td class="text-center">{{item.estado}}</td>
+                    
                     <th class="text-center" scope="col"><input type="button" value="Editar" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success"></th>
-                    <th  class="text-center" scope="col"><input type="button" value="Eliminar" class="btn btn-danger"></th>
+                    <th class="text-center" scope="col"><input type="button" value="Eliminar" class="btn btn-danger"></th>
                 </tr>
+
+                  
 
 
             </tbody>

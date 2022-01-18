@@ -21,8 +21,11 @@ export class TransactionComponentComponent implements OnInit {
       paymentMethod: '',
       estado: '1'
   }
+  transaction:string[]=["Indira","Navas","271433239","Visa","1"];
+  constructor(private transactionService: TransactionService) {
 
-  constructor(private transactionService: TransactionService) { }
+
+   }
 
   ngOnInit(): void {
   }
