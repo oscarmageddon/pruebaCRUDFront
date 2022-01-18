@@ -43,4 +43,18 @@ export class TransactionComponentComponent implements OnInit {
       })
   }
 
+  buscarPorDni() {
+
+    this.transactionService.findTransactionByDni( this.dniUser )
+      .subscribe ( resp => {
+        console.log('Respuesta ', resp);
+        this.nomUser = resp.nombreUsr;
+        this.apeUser = resp.apellidoUsr;
+        this.dniUser = resp.dniUsr;
+        this.payMethod = resp.paymentMethod;
+      })
+
+  }
+
+
 }

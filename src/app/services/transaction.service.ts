@@ -9,11 +9,16 @@ import { Transaction } from '../interfaces/transaction.interface';
 })
 export class TransactionService {
 
-  private baseUrl: string = 'http://localhost:8080/rest/'
+  private baseUrl: string = 'http://localhost:8080/transaction'
 
   constructor( private http: HttpClient ) { }
 
   saveTransaction(trx: Transaction): Observable<Transaction> {
-    return this.http.post<Transaction>(`${ this.baseUrl }tranx/`, trx);
+    return this.http.post<Transaction>(`${ this.baseUrl }/`, trx);
   }
+
+  findTransactionByDni(dniUsr: String): Observable<Transaction> {
+    return this.http.get<Transaction>(`${ this.baseUrl }/dni/`+dniUsr);
+  }
+
 }
