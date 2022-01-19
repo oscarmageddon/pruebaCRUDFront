@@ -24,6 +24,7 @@
                         <div class="alert alert-{{ trx.estado === '1' ? 'success' : 'danger' }}" role="alert">
                             {{ trx.estado === '1' ? 'Habilitado' : 'Inhabilitado' }}
                         </div>
+                        <div class="error">{{ errorMessage }}</div>
                         <br>
                         <input type="button" style="margin: 10px" value="Agregar" (click)="guardar()" class="btn btn-primary">
                         <input type="button" style="margin: 10px" value="Buscar por Rut" (click)="buscarPorDni()" class="btn btn-primary">
