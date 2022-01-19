@@ -39,6 +39,15 @@ export class TransactionComponentComponent implements OnInit {
       estado: '1'
     }
 
+    this.transactionService.saveTransaction(this.trx)
+      .subscribe({
+        next: (resp) => console.log('Respuesta ', resp),
+        error: (respError) => {
+        console.log(respError.error);
+        this.errorMessage = respError.error.errorMessage;
+      },
+    })
+
   }
 
   buscarPorDni() {
@@ -74,14 +83,6 @@ export class TransactionComponentComponent implements OnInit {
           console.log('Updated: ', resp);
         })
     }
-  }
-  
-  editarDatos() {
-
-  }
-
-  borrarDatos(){
-    
   }
 
 
