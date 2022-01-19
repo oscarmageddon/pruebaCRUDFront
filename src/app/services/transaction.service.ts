@@ -26,7 +26,7 @@ export class TransactionService {
   }
 
   getAll(): Observable<Array<Transaction>> {
-    return this.http.get<Array<Transaction>>(`${this.baseUrl}/getall`);
+    return this.http.get<Array<Transaction>>(`${this.baseUrl}/`);
   }
 
   getById(id: string): Observable<Transaction> {
