@@ -52,8 +52,28 @@ export class TransactionComponentComponent implements OnInit {
         this.apeUser = resp.apellidoUsr;
         this.dniUser = resp.dniUsr;
         this.payMethod = resp.paymentMethod;
+
+        this.trx = {
+          nombreUsr: resp.nombreUsr,
+          apellidoUsr: resp.apellidoUsr,
+          dniUsr: resp.dniUsr,
+          paymentMethod: resp.paymentMethod,
+          estado: resp.estado,
+          id: resp.id
+        }
       })
 
+
+  }
+
+  actualizarEstadoDni(){
+    if(this.trx.dniUsr !== ''){
+      this.trx.estado = this.trx.estado === '1' ? '0' : '1';
+      this.transactionService.updateStateByDni( this.trx )
+      .subscribe ( resp => {
+        console.log('Updated: ', resp);
+      })
+    }
   }
 
 
