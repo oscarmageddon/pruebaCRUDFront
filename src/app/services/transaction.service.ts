@@ -9,11 +9,12 @@ import { Transaction } from '../interfaces/transaction.interface';
 })
 export class TransactionService {
 
-  private baseUrl: string = 'http://localhost:8080/rest/'
+  private baseUrl: string = 'http://localhost:8080/transaction'
 
-  constructor( private http: HttpClient ) { }
+  constructor(private http: HttpClient) { }
 
   saveTransaction(trx: Transaction): Observable<Transaction> {
+<<<<<<< HEAD
     return this.http.post<Transaction>(`${ this.baseUrl }/`, trx);
   }
 
@@ -41,4 +42,16 @@ delete(id: string) {
     return this.http.delete(`${this.baseUrl}/${id}`);
 }
 
+=======
+    return this.http.post<Transaction>(`${this.baseUrl}/`, trx);
+  }
+
+  findTransactionByDni(dniUsr: String): Observable<Transaction> {
+    return this.http.get<Transaction>(`${this.baseUrl}/dni/` + dniUsr);
+  }
+
+  updateStateByDni(trx: Transaction): Observable<Transaction> {
+    return this.http.put<Transaction>(`${this.baseUrl}/${trx.id}`, trx);
+  }
+>>>>>>> origin
 }

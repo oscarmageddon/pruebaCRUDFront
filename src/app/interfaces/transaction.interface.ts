@@ -6,6 +6,10 @@ export interface Transaction {
     paymentMethod: string;
     estado?: string;
     id?: number;
+<<<<<<< HEAD
     
 }
 
+=======
+}
+>>>>>>> origin
