@@ -9,7 +9,7 @@ import { Transaction } from '../interfaces/transaction.interface';
 })
 export class TransactionService {
 
-  private baseUrl: string = 'http://localhost:8080/rest/'
+  private baseUrl: string = 'http://localhost:8080/rest'
 
   constructor( private http: HttpClient ) { }
 

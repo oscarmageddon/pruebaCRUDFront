@@ -32,7 +32,6 @@ export class TransactionComponentComponent implements OnInit {
 
   ngOnInit(): void {
     this.transactionService.getAll()
-      .pipe(first())
       .subscribe(transactions => this.transactions = transactions);
 
   }
