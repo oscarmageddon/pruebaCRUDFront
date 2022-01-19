@@ -4,7 +4,7 @@
         <div class="row justify-content-md-center">
 
             <h2 class="mt-5">Gestion de Transaccion
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-right" viewBox="0 0 16 16">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-right" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M6.776 1.553a.5.5 0 0 1 .671.223l3 6a.5.5 0 0 1 0 .448l-3 6a.5.5 0 1 1-.894-.448L9.44 8 6.553 2.224a.5.5 0 0 1 .223-.671z"/>
               </svg></h2>
         </div>
@@ -15,23 +15,21 @@
                 <div class="card-body">
                     <div class="mb-3">
                         <br><br>
-                        <input type="text" name="nomUser" class="form-control" [(ngModel)]="nomUser"
-                            placeholder="Nombre..." /><br>
-                        <input type="text" name="apeUser" class="form-control" [(ngModel)]="apeUser"
-                            placeholder="Apellido..." /><br>
-                        <input type="text" name="dniUser" class="form-control" [(ngModel)]="dniUser"
-                            placeholder="Rut..." /><br>
-                        <input type="text" name="payMethod" class="form-control" [(ngModel)]="payMethod"
-                            placeholder="Metodo de pago..." />
+                        <input type="text" name="nomUser" class="form-control" [(ngModel)]="nomUser" placeholder="Nombre..." /><br>
+                        <input type="text" name="apeUser" class="form-control" [(ngModel)]="apeUser" placeholder="Apellido..." /><br>
+                        <input type="text" name="dniUser" class="form-control" [(ngModel)]="dniUser" placeholder="Rut..." /><br>
+                        <input type="text" name="payMethod" class="form-control" [(ngModel)]="payMethod" placeholder="Metodo de pago..." />
                         <br>
                         <input type="button" style="margin: 10px" value="Agregar" (click)="guardar()" class="btn btn-primary">
                         <input type="button" value="Buscar por Rut" (click)="buscarPorDni()" class="btn btn-primary">
+                        <input type="button" style="margin: 10px" value="Ver Transacciones" class="btn btn-primary">
+                        <input type="button" value="Editar" class="btn btn-primary">
                     </div>
                 </div>
             </div>
         </form>
 
-       <br>
+        <br>
         <div class="row mg-t-12 mg-b-12 mg-l-12 mg-b-10">
             <div class="col-lg-5">
                 <div class="search-box pull-left" style="width: 250px !important;">
@@ -63,8 +61,8 @@
                 </tr>
             </thead>
             <tbody>
-              <tr >
-            <!-- 			    
+                <tr>
+                    <!-- 			    
                 <tr *ngFor="let item of transactions">
                     <th scope="row" class="text-center">{{item.code}}</th>
                         <td class="text-center">{{item.nombre}}</td>
@@ -80,6 +78,6 @@
             </tbody>
         </table>
     </div>
- 
+
     <div class="col"></div>
 </div>

@@ -37,6 +37,8 @@ export class TransactionComponentComponent implements OnInit {
       estado: '1'
     }
 
+    
+
     this.transactionService.saveTransaction( this.trx )
       .subscribe ( resp => {
         console.log('Respuesta ', resp)
