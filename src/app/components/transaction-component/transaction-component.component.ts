@@ -61,13 +61,13 @@ export class TransactionComponentComponent implements OnInit {
       })
   }
 
-  deleteUser(id: string) {
-    const transaction = this.transactions=.find(x => x.id === id);
+  deleteTransaction(id: string) {
+    const transaction = this.transactions.find(x => x id === id);
     if (!transaction) return;
-    transaction.isDeleting = true;
+    transaction.Deleting = true;
     this.transactionService.delete(id)
         .pipe(first())
-        .subscribe(() => this.transactions= this.transactions=.filter(x => x.id !== id));
+        .subscribe(() => this.transactions= this.transactions.filter(x => x id !== id));
 }
 
 
