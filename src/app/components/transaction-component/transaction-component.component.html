@@ -47,7 +47,7 @@
         <table class="table table-responsive table-hover">
             <thead>
                 <tr class="primary">
-                    <th scope="col"></th>
+                    <th scope="col">ID</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Apellido</th>
                     <th scope="col">Rut</th>
@@ -63,18 +63,18 @@
             </thead>
             <tbody>
                 <tr>
-                    <!-- 			    
-                <tr *ngFor="let item of transactions">
-                    <th scope="row" class="text-center">{{item.code}}</th>
-                        <td class="text-center">{{item.nombre}}</td>
-                        <td class="text-center">{{item.apellido}}</td>
-                        <td class="text-center">{{item.metodo}}</td>
+
+                    <tr *ngFor="let item of transactions">
+                        <th scope="row" class="text-center">{{item.id}}</th>
+                        <td class="text-center">{{item.nombreUsr}}</td>
+                        <td class="text-center">{{item.apellidoUsr}}</td>
+                        <td class="text-center">{{item.paymentMethod}}</td>
                         <td class="text-center">{{item.estado}}</td>
-                    
-                    <th class="text-center" scope="col"><input type="button" value="Editar" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success"></th>
-                    <th class="text-center" scope="col"><input type="button" value="Eliminar" class="btn btn-danger"></th>
-                </tr> 
-            -->
+
+                        <th class="text-center" scope="col"><input type="button" value="Editar" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success"></th>
+                        <th class="text-center" scope="col"><input type="button" value="Eliminar" class="btn btn-danger"></th>
+                    </tr>
+
 
             </tbody>
         </table>
