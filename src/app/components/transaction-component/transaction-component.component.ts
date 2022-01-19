@@ -57,7 +57,6 @@ export class TransactionComponentComponent implements OnInit {
   }
 
   buscarPorDni() {
-
     this.transactionService.findTransactionByDni(this.dniUser)
       .subscribe({
         next: (resp) => {
