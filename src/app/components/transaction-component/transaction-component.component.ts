@@ -40,41 +40,39 @@ export class TransactionComponentComponent implements OnInit {
     }
 
     this.transactionService.saveTransaction(this.trx)
-      .subscribe(
-        (resp) => {
-         console.log('Respuesta ', resp)
-        },
-        (respError) => {
-          console.log(respError.error);
-          this.errorMessage = respError.error.errorMessage;
-        },
-      )
+      .subscribe({
+        next: (resp) => console.log('Respuesta ', resp),
+        error: (respError) => {
+        console.log(respError.error);
+        this.errorMessage = respError.error.errorMessage;
+      },
+    })
+
   }
 
   buscarPorDni() {
-
-    this.transactionService.findTransactionByDni(this.dniUser)
-      .subscribe(resp => {
-        console.log('Respuesta ', resp);
-        this.nomUser = resp.nombreUsr;
-        this.apeUser = resp.apellidoUsr;
-        this.dniUser = resp.dniUsr;
-        this.payMethod = resp.paymentMethod;
-
-        this.trx = {
-          nombreUsr: resp.nombreUsr,
-          apellidoUsr: resp.apellidoUsr,
-          dniUsr: resp.dniUsr,
-          paymentMethod: resp.paymentMethod,
-          estado: resp.estado,
-          id: resp.id
-        }
-      },
-      (respError) => {
-        console.log(respError.error);
-        this.errorMessage = respError.error.errorMessage;
-      }
-      )
+      this.transactionService.findTransactionByDni(this.dniUser)
+      .subscribe({
+        next: (resp) => {
+          console.log('Respuesta ', resp);
+          this.nomUser = resp.nombreUsr;
+          this.apeUser = resp.apellidoUsr;
+          this.dniUser = resp.dniUsr;
+          this.payMethod = resp.paymentMethod;
+          this.trx = {
+            nombreUsr: resp.nombreUsr,
+            apellidoUsr: resp.apellidoUsr,
+            dniUsr: resp.dniUsr,
+            paymentMethod: resp.paymentMethod,
+            estado: resp.estado,
+            id: resp.id
+          }
+        },
+        error: (respError) => {
+          console.log(respError.error);
+          this.errorMessage = respError.error.errorMessage;
+        },
+      })
   }
 
   actualizarEstadoDni() {
