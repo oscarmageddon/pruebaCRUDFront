@@ -8,10 +8,9 @@
                 <path fill-rule="evenodd" d="M6.776 1.553a.5.5 0 0 1 .671.223l3 6a.5.5 0 0 1 0 .448l-3 6a.5.5 0 1 1-.894-.448L9.44 8 6.553 2.224a.5.5 0 0 1 .223-.671z"/>
               </svg></h2>
         </div>
-
+       
 
         <form>
-
             <div class="card">
                 <div class="card-body">
                     <div class="mb-3">
@@ -25,14 +24,14 @@
                         <input type="text" name="payMethod" class="form-control" [(ngModel)]="payMethod"
                             placeholder="Metodo de pago..." />
                         <br>
-                        <input type="button" value="Agregar" (click)="guardar()" class="btn btn-primary">
+                        <input type="button" style="margin: 10px" value="Agregar" (click)="guardar()" class="btn btn-primary">
+                        <input type="button" value="Buscar por Rut" (click)="buscarPorDni()" class="btn btn-primary">
                     </div>
                 </div>
             </div>
-
-
         </form>
-        <br>
+
+       <br>
         <div class="row mg-t-12 mg-b-12 mg-l-12 mg-b-10">
             <div class="col-lg-5">
                 <div class="search-box pull-left" style="width: 250px !important;">
@@ -64,20 +63,19 @@
                 </tr>
             </thead>
             <tbody>
-              <tr >
-			    <tr *ngFor="let item of transactions">
-                    <th scope="row" class="text-center">{{item.id}}</th>
-                        <td class="text-center">{{item.nombre}}</td>
-                        <td class="text-center">{{item.apellido}}</td>
-                        <td class="text-center">{{item.metodo}}</td>
-                        <td class="text-center">{{item.estado}}</td>
-                    
+             <tr >
+            			    
+              <tr *ngFor="let transaction of transactions">
+                    <th scope="row" class="text-center">{{transaction.id}}</th>
+                        <td class="text-center">{{transaction.nombreUsr}}</td>
+                        <td class="text-center">{{transaction.apellidoUsr}}</td>
+                        <td class="text-center">{{transaction. dniUsr}}</td>
+                        <td class="text-center">{{transaction.paymentMethod}}</td>
+                        <td class="text-center">{{transaction.estado}}</td>
                     <th class="text-center" scope="col"><input type="button" value="Editar" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success"></th>
                     <th class="text-center" scope="col"><input type="button" value="Eliminar" class="btn btn-danger"></th>
-                </tr>
-
-                  
-
+                </tr> 
+            
 
             </tbody>
         </table>

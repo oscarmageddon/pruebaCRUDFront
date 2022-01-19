@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { first } from 'rxjs/operators';
 import { TransactionService } from '../../services/transaction.service';
 import { Transaction } from '../../interfaces/transaction.interface';
+
 
 @Component({
   selector: 'app-transaction-component',
@@ -8,7 +10,7 @@ import { Transaction } from '../../interfaces/transaction.interface';
   styleUrls: ['./transaction-component.component.scss']
 })
 export class TransactionComponentComponent implements OnInit {
-
+  transactions!: Transaction[];
   nomUser: string = '';
   apeUser: string = '';
   dniUser: string = '';
@@ -21,18 +23,17 @@ export class TransactionComponentComponent implements OnInit {
       paymentMethod: '',
       estado: '1'
   }
-  transaction:string[]=["Indira","Navas","271433239","Visa","1"];
-  constructor(private transactionService: TransactionService) {
 
-
-   }
+  
+  constructor(private transactionService: TransactionService) { }
 
   ngOnInit(): void {
+
+    
   }
 
   guardar() {
-
-    this.trx = {
+      this.trx = {
       nombreUsr: this.nomUser,
       apellidoUsr: this.apeUser,
       dniUsr: this.dniUser,
@@ -45,5 +46,24 @@ export class TransactionComponentComponent implements OnInit {
         console.log('Respuesta ', resp)
       })
   }
+
+  buscarPorDni() {
+    this.transactionService.findTransactionByDni( this.dniUser )
+      .subscribe ( resp => {
+        console.log('Respuesta ', resp);
+        this.nomUser = resp.nombreUsr;
+        this.apeUser = resp.apellidoUsr;
+        this.dniUser = resp.dniUsr;
+        this.payMethod = resp.paymentMethod;
+      })
+  }
+
+
+
+  Listar() {
+  this.transactionService.getAll()
+    .pipe(first())
+    .subscribe(transactions=> this.transactions = transactions);
+}
 
 }

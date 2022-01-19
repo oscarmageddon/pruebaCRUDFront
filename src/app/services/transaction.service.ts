@@ -14,10 +14,31 @@ export class TransactionService {
   constructor( private http: HttpClient ) { }
 
   saveTransaction(trx: Transaction): Observable<Transaction> {
-     return this.http.post<Transaction>(`${ this.baseUrl }/`, trx);
-
-
+    return this.http.post<Transaction>(`${ this.baseUrl }/`, trx);
   }
 
-  
+  findTransactionByDni(dniUsr: String): Observable<Transaction> {
+    return this.http.get<Transaction>(`${ this.baseUrl }/dni/`+dniUsr);
+  }
+
+  getAll() {
+    return this.http.get<Transaction[]>(`${ this.baseUrl }/`);
+}
+
+getById(id: string) {
+    return this.http.get<Transaction>(`${this.baseUrl}/${id}`);
+}
+
+create(params: any) {
+    return this.http.post(this.baseUrl, params);
+}
+
+updateStateByDni(trx: Transaction): Observable<Transaction> {
+  return this.http.put<Transaction>(`${this.baseUrl}/${trx.id}`, trx);
+}
+
+delete(id: string) {
+    return this.http.delete(`${this.baseUrl}/${id}`);
+}
+
 }
