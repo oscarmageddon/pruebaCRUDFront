@@ -14,6 +14,8 @@ export class TransactionComponentComponent implements OnInit {
   dniUser: string = '';
   payMethod: string = '';
 
+  errorMessage: any; 
+
   trx: Transaction = {
     nombreUsr: '',
     apellidoUsr: '',
@@ -38,9 +40,15 @@ export class TransactionComponentComponent implements OnInit {
     }
 
     this.transactionService.saveTransaction(this.trx)
-      .subscribe(resp => {
-        console.log('Respuesta ', resp)
-      })
+      .subscribe(
+        (resp) => {
+         console.log('Respuesta ', resp)
+        },
+        (respError) => {
+          console.log(respError.error);
+          this.errorMessage = respError.error.errorMessage;
+        },
+      )
   }
 
   buscarPorDni() {
@@ -61,7 +69,12 @@ export class TransactionComponentComponent implements OnInit {
           estado: resp.estado,
           id: resp.id
         }
-      })
+      },
+      (respError) => {
+        console.log(respError.error);
+        this.errorMessage = respError.error.errorMessage;
+      }
+      )
   }
 
   actualizarEstadoDni() {
