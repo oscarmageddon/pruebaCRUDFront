@@ -14,12 +14,14 @@ export class TransactionComponentComponent implements OnInit {
   dniUser: string = '';
   payMethod: string = '';
 
+  errorMessage: any; 
+
   trx: Transaction = {
-      nombreUsr: '',
-      apellidoUsr: '',
-      dniUsr: '',
-      paymentMethod: '',
-      estado: '1'
+    nombreUsr: '',
+    apellidoUsr: '',
+    dniUsr: '',
+    paymentMethod: '',
+    estado: '1'
   }
 
   constructor(private transactionService: TransactionService) { }
@@ -37,16 +39,22 @@ export class TransactionComponentComponent implements OnInit {
       estado: '1'
     }
 
-    this.transactionService.saveTransaction( this.trx )
-      .subscribe ( resp => {
-        console.log('Respuesta ', resp)
-      })
+    this.transactionService.saveTransaction(this.trx)
+      .subscribe(
+        (resp) => {
+         console.log('Respuesta ', resp)
+        },
+        (respError) => {
+          console.log(respError.error);
+          this.errorMessage = respError.error.errorMessage;
+        },
+      )
   }
 
   buscarPorDni() {
 
-    this.transactionService.findTransactionByDni( this.dniUser )
-      .subscribe ( resp => {
+    this.transactionService.findTransactionByDni(this.dniUser)
+      .subscribe(resp => {
         console.log('Respuesta ', resp);
         this.nomUser = resp.nombreUsr;
         this.apeUser = resp.apellidoUsr;
@@ -61,20 +69,22 @@ export class TransactionComponentComponent implements OnInit {
           estado: resp.estado,
           id: resp.id
         }
-      })
-
-
+      },
+      (respError) => {
+        console.log(respError.error);
+        this.errorMessage = respError.error.errorMessage;
+      }
+      )
   }
 
-  actualizarEstadoDni(){
-    if(this.trx.dniUsr !== ''){
+  actualizarEstadoDni() {
+    if (this.trx.dniUsr !== '') {
       this.trx.estado = this.trx.estado === '1' ? '0' : '1';
-      this.transactionService.updateStateByDni( this.trx )
-      .subscribe ( resp => {
-        console.log('Updated: ', resp);
-      })
+      this.transactionService.updateStateByDni(this.trx)
+        .subscribe(resp => {
+          console.log('Updated: ', resp);
+        })
     }
   }
-
 
 }

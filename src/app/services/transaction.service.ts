@@ -20,9 +20,8 @@ export class TransactionService {
   findTransactionByDni(dniUsr: String): Observable<Transaction> {
     return this.http.get<Transaction>(`${this.baseUrl}/dni/` + dniUsr);
   }
-
+  
   updateStateByDni(trx: Transaction): Observable<Transaction> {
     return this.http.put<Transaction>(`${this.baseUrl}/${trx.id}`, trx);
   }
-
-}
+} 
