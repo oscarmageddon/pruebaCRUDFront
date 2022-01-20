@@ -11,7 +11,9 @@ import { Transaction } from '../../interfaces/transaction.interface';
 
 })
 export class TransactionComponentComponent implements OnInit {
-  transactions!: Transaction[];
+  
+  transactions: Array<Transaction> = new Array<Transaction>() ;
+
   nomUser: string = '';
   apeUser: string = '';
   dniUser: string = '';
@@ -31,8 +33,13 @@ export class TransactionComponentComponent implements OnInit {
   constructor(private transactionService: TransactionService,) { }
 
   ngOnInit(): void {
-    this.transactionService.getAll()
-      .subscribe(transactions => this.transactions = transactions);
+      this.transactionService.getAll()
+        .subscribe(transactions => {
+          this.transactions = transactions;
+          console.log('Transactions', transactions);
+        });
+    
+      
 
   }
 
@@ -80,4 +87,14 @@ export class TransactionComponentComponent implements OnInit {
         },
       })
   }
+
+  deleteTras(id:number){
+       this.transactionService.delete(id)
+       .subscribe(data=>{
+        // this.transactions=this.transactions.filter(t=>t!== id)
+         alert("Transaction Eliminada...");
+       });
+    }
+
+   
 }

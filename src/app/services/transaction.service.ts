@@ -9,7 +9,7 @@ import { Transaction } from '../interfaces/transaction.interface';
 })
 export class TransactionService {
 
-  private baseUrl: string = 'http://localhost:8080/rest'
+  private baseUrl: string = 'http://localhost:8080/transaction'
 
   constructor( private http: HttpClient ) { }
 
@@ -20,14 +20,14 @@ export class TransactionService {
   findTransactionByDni(dniUsr: String): Observable<Transaction> {
     return this.http.get<Transaction>(`${ this.baseUrl }/dni/`+dniUsr);
   }
+  
+  getAll(): Observable<Array<Transaction>> {
+    return this.http.get<Array<Transaction>>(`${this.baseUrl}/`);
+  }
 
-  getAll() {
-    return this.http.get<Transaction[]>(`${ this.baseUrl }/`);
-}
-
-getById(id: string) {
+  getById(id: string): Observable<Transaction> {
     return this.http.get<Transaction>(`${this.baseUrl}/${id}`);
-}
+  }
 
 create(params: any) {
     return this.http.post(this.baseUrl, params);
@@ -37,8 +37,8 @@ updateStateByDni(trx: Transaction): Observable<Transaction> {
   return this.http.put<Transaction>(`${this.baseUrl}/${trx.id}`, trx);
 }
 
-delete(id: string) {
-    return this.http.delete(`${this.baseUrl}/${id}`);
+delete(id: number) {
+    return this.http.delete<Transaction>(`${this.baseUrl}/${id}`);
 }
 
 }

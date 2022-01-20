@@ -1,4 +1,6 @@
 <div class="row">
+
+   
     <div class="col"></div>
     <div class="col-md-10">
         <div class="row justify-content-md-center">
@@ -8,7 +10,8 @@
                 <path fill-rule="evenodd" d="M6.776 1.553a.5.5 0 0 1 .671.223l3 6a.5.5 0 0 1 0 .448l-3 6a.5.5 0 1 1-.894-.448L9.44 8 6.553 2.224a.5.5 0 0 1 .223-.671z"/>
               </svg></h2>
         </div>
-       
+ 
+   
 
         <form>
             <div class="card">
@@ -66,22 +69,52 @@
             </thead>
             <tbody>
              <tr >
-            			    
-              <tr *ngFor="let transaction of transactions">
-                    <th scope="row" class="text-center">{{transaction.id}}</th>
-                        <td class="text-center">{{transaction.nombreUsr}}</td>
-                        <td class="text-center">{{transaction.apellidoUsr}}</td>
-                        <td class="text-center">{{transaction. dniUsr}}</td>
-                        <td class="text-center">{{transaction.paymentMethod}}</td>
-                        <td class="text-center">{{transaction.estado}}</td>
-                    <th class="text-center" scope="col"><input type="button" value="Editar" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success"></th>
-                    <th class="text-center" scope="col"><input type="button" value="Eliminar" class="btn btn-danger"></th>
+            		 
+              <tr >
+                    <th scope="row" class="text-center">1</th>
+                        <td class="text-center">Indira</td>
+                        <td class="text-center">Navas</td>
+                        <td class="text-center">2714333239</td>
+                        <td class="text-center">MASTER</td>
+                        <td class="text-center">1</td>
+                    <th class="text-center" scope="col"><input type="button" value="Editar" class="btn btn-success"></th>
+                    <th class="text-center" scope="col"><input type="button" value="Eliminar" data-bs-toggle="modal" data-bs-target="#eliminar" class="btn btn-danger"></th>
                 </tr> 
-            
+                  
 
             </tbody>
         </table>
     </div>
  
+
+      
     <div class="col"></div>
+
+    </div>
+    
+    <!-- The Modal -->
+    <div class="modal" id="eliminar">
+      <div class="modal-dialog">
+        <div class="modal-content">
+    
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Eliminar transacción </h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+    
+          <!-- Modal body -->
+          <div class="modal-body">
+            ¿Quiere eliminar transacción?
+          </div>
+    
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button  class="btn btn-success" data-bs-dismiss="modal" >Aceptar</button>
+          </div>
+    
 </div>
+</div>
+</div>
+
