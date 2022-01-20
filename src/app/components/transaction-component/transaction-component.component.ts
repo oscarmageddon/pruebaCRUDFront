@@ -17,6 +17,8 @@ export class TransactionComponentComponent implements OnInit {
   dniUser: string = '';
   payMethod: string = '';
 
+  editando: boolean = false;
+
   errorMessage: any; 
 
   trx: Transaction = {
@@ -89,4 +91,16 @@ export class TransactionComponentComponent implements OnInit {
         })
     }
   }
+
+
+  actualizarForm(transaction:any) {
+    console.log(transaction);
+    this.nomUser = transaction.nombreUsr;
+    this.apeUser = transaction.apellidoUsr;
+    this.dniUser = transaction.dniUsr;
+    this.payMethod = transaction.paymentMethod;
+
+    this.editando = true;
+  }
+
 }

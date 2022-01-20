@@ -70,7 +70,7 @@
                         <td class="text-center">{{item.paymentMethod}}</td>
                         <td class="text-center">{{item.estado}}</td>
 
-                        <th class="text-center" scope="col"><input type="button" value="Editar" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success"></th>
+                        <th class="text-center" scope="col"><input type="button" (click)='actualizarForm(item)' value="Editar" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success"></th>
                         <th class="text-center" scope="col"><input type="button" value="Eliminar" class="btn btn-danger">
                         </th>
                     </tr>
