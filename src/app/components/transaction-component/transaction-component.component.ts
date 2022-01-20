@@ -33,11 +33,8 @@ export class TransactionComponentComponent implements OnInit {
   constructor(private transactionService: TransactionService,) { }
 
   ngOnInit(): void {
-      this.transactionService.getAll()
-        .subscribe(transactions => {
-          this.transactions = transactions;
-          console.log('Transactions', transactions);
-        });
+    this.transactionService.getAll()
+      .subscribe(transactions => this.transactions = transactions);
     
       
 

@@ -70,16 +70,25 @@
             <tbody>
              <tr >
             		 
-              <tr >
-                    <th scope="row" class="text-center">1</th>
-                        <td class="text-center">Indira</td>
-                        <td class="text-center">Navas</td>
-                        <td class="text-center">2714333239</td>
-                        <td class="text-center">MASTER</td>
-                        <td class="text-center">1</td>
-                    <th class="text-center" scope="col"><input type="button" value="Editar" class="btn btn-success"></th>
-                    <th class="text-center" scope="col"><input type="button" value="Eliminar" data-bs-toggle="modal" data-bs-target="#eliminar" class="btn btn-danger"></th>
-                </tr> 
+                <tr *ngFor="let transaction of transactions">
+
+                    <th scope="row" class="text-center">{{transaction.id}}</th>
+
+                        <td class="text-center">{{transaction.nombreUsr}}</td>
+
+                        <td class="text-center">{{transaction.apellidoUsr}}</td>
+
+                        <td class="text-center">{{transaction. dniUsr}}</td>
+
+                        <td class="text-center">{{transaction.paymentMethod}}</td>
+
+                        <td class="text-center">{{transaction.estado}}</td>
+
+                    <th class="text-center" scope="col"><input type="button" value="Editar" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success"></th>
+
+                    <th class="text-center" scope="col"><input type="button" value="Eliminar" class="btn btn-danger"></th>
+
+                </tr>
                   
 
             </tbody>
