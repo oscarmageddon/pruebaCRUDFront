@@ -6,3 +6,4 @@ export interface Transaction {
     estado?: string;
     id?: number;
 }
+
