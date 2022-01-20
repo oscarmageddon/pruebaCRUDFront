@@ -11,16 +11,16 @@ export class TransactionService {
 
   private baseUrl: string = 'http://localhost:8080/transaction'
 
-  constructor( private http: HttpClient ) { }
+  constructor(private http: HttpClient) { }
 
   saveTransaction(trx: Transaction): Observable<Transaction> {
-    return this.http.post<Transaction>(`${ this.baseUrl }/`, trx);
+    return this.http.post<Transaction>(`${this.baseUrl}/`, trx);
   }
 
   findTransactionByDni(dniUsr: String): Observable<Transaction> {
-    return this.http.get<Transaction>(`${ this.baseUrl }/dni/`+dniUsr);
+    return this.http.get<Transaction>(`${this.baseUrl}/dni/` + dniUsr);
   }
-  
+
   getAll(): Observable<Array<Transaction>> {
     return this.http.get<Array<Transaction>>(`${this.baseUrl}/`);
   }
@@ -29,16 +29,15 @@ export class TransactionService {
     return this.http.get<Transaction>(`${this.baseUrl}/${id}`);
   }
 
-create(params: any) {
+  create(params: any) {
     return this.http.post(this.baseUrl, params);
-}
+  }
 
-updateStateByDni(trx: Transaction): Observable<Transaction> {
-  return this.http.put<Transaction>(`${this.baseUrl}/${trx.id}`, trx);
-}
+  updateStateByDni(trx: Transaction): Observable<Transaction> {
+    return this.http.put<Transaction>(`${this.baseUrl}/${trx.id}`, trx);
+  }
 
-delete(id: number) {
+  delete(id: number) {
     return this.http.delete<Transaction>(`${this.baseUrl}/${id}`);
-}
-
+  }
 }

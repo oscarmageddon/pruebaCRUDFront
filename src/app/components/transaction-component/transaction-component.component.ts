@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { TransactionService } from '../../services/transaction.service';
 import { Transaction } from '../../interfaces/transaction.interface';
+import { compileNgModuleDeclarationExpression } from '@angular/compiler/src/render3/r3_module_compiler';
 
 
 @Component({
@@ -13,6 +14,7 @@ import { Transaction } from '../../interfaces/transaction.interface';
 export class TransactionComponentComponent implements OnInit {
   
   transactions: Array<Transaction> = new Array<Transaction>() ;
+
 
   nomUser: string = '';
   apeUser: string = '';
@@ -34,10 +36,10 @@ export class TransactionComponentComponent implements OnInit {
 
   ngOnInit(): void {
     this.transactionService.getAll()
-      .subscribe(transactions => this.transactions = transactions);
-    
-      
-
+      .subscribe(transactions => {
+        this.transactions = transactions;
+        console.log('Transactions', transactions);
+      });
   }
 
   guardar() {
