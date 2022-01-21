@@ -2,7 +2,6 @@
     <div class="col"></div>
     <div class="col-md-10">
         <div class="row justify-content-md-center">
-
             <h2 class="mt-5">Gestion de Transaccion
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-right" viewBox="0 0 16 16">
                     <path fill-rule="evenodd"
@@ -10,8 +9,6 @@
                 </svg>
             </h2>
         </div>
-
-
         <form>
             <div class="card">
                 <div class="card-body">
@@ -26,14 +23,14 @@
                         </div>
                         <div class="error">{{ errorMessage }}</div>
                         <br>
-                        <input type="button" style="margin: 10px" value="Agregar" (click)="guardar()" class="btn btn-primary">
-                        <input type="button" style="margin: 10px" value="Buscar por Rut" (click)="buscarPorDni()" class="btn btn-primary">
+                        <input type="button" *ngIf="!editando" style="margin: 10px" value="Agregar" (click)="guardar()" class="btn btn-primary">
+                        <input type="button" *ngIf="editando" style="margin: 10px" value="Editar" (click)="editar()" class="btn btn-primary">
+                        <input type="button" value="Buscar por Rut" (click)="buscarPorDni()" class="btn btn-primary">
                         <input type="button" style="margin: 10px" value="Habilitar/Inhabilitar" (click)="actualizarEstadoDni()" class="btn btn-primary">
                     </div>
                 </div>
             </div>
         </form>
-
         <br>
         <div class="row mg-t-12 mg-b-12 mg-l-12 mg-b-10">
             <div class="col-lg-5">
@@ -53,49 +50,47 @@
                     <th scope="col">Metodo de Pago</th>
                     <th scope="col">Estado</th>
                     <th scope="col">
-
                     </th>
                     <th scope="col">
-
                     </th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
 
-                    <tr *ngFor="let item of transactions">
-                        <th scope="row" class="text-center">{{item.id}}</th>
-                        <td class="text-center">{{item.nombreUsr}}</td>
-                        <td class="text-center">{{item.apellidoUsr}}</td>
-                        <td class="text-center">{{item.paymentMethod}}</td>
-                        <td class="text-center">{{item.estado}}</td>
+                <tr *ngFor="let item of transactions">
+                    <th scope="row" class="text-center">{{item.id}}</th>
+                    <td class="text-center">{{item.nombreUsr}}</td>
+                    <td class="text-center">{{item.apellidoUsr}}</td>
+                    <td class="text-center">{{item.dniUsr}}</td>
+                    <td class="text-center">{{item.paymentMethod}}</td>
+                    <td class="text-center">{{item.estado}}</td>
 
-                        <th class="text-center" scope="col"><input type="button" value="Editar" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success"></th>
-                        <th class="text-center" scope="col"><input type="button" value="Eliminar" class="btn btn-danger">
-                        </th>
-                    </tr>
-
-
+                    <th class="text-center" scope="col"><input type="button" (click)='actualizarForm(item)' value="Editar" class="btn btn-success"></th>
+                    <th class="text-center" scope="col"><input type="button" value="Eliminar" class="btn btn-danger">
+                    </th>
+                </tr>
             </tbody>
         </table>
     </div>
-
     <div class="col"></div>
-    <input type="button" value="Eliminar" data-bs-toggle="modal" data-bs-target="#myModal" class="btn btn-danger">
-    <div class="modal" id="myModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Modal body text goes here.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+</div>
+<!-- The Modal -->
+<div class="modal" id="eliminar">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Eliminar transacción </h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                ¿Quiere eliminar transacción?
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button class="btn btn-success" data-bs-dismiss="modal">Aceptar</button>
             </div>
         </div>
     </div>
