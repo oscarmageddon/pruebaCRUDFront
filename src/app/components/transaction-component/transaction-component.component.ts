@@ -12,10 +12,10 @@ import { compileNgModuleDeclarationExpression } from '@angular/compiler/src/rend
 
 })
 export class TransactionComponentComponent implements OnInit {
-  
-  transactions: Array<Transaction> = new Array<Transaction>() ;
 
+  transactions: Array<Transaction> = new Array<Transaction>();
 
+  id: number = 0;
   nomUser: string = '';
   apeUser: string = '';
   dniUser: string = '';
@@ -23,9 +23,10 @@ export class TransactionComponentComponent implements OnInit {
 
   editando: boolean = false;
 
-  errorMessage: any; 
+  errorMessage: any;
 
   trx: Transaction = {
+    id:0,
     nombreUsr: '',
     apellidoUsr: '',
     dniUsr: '',
@@ -37,12 +38,17 @@ export class TransactionComponentComponent implements OnInit {
   constructor(private transactionService: TransactionService,) { }
 
   ngOnInit(): void {
+    this.obtenerTodas();
+  }
+  
+  obtenerTodas(){
     this.transactionService.getAll()
       .subscribe(transactions => {
         this.transactions = transactions;
         console.log('Transactions', transactions);
       });
   }
+
 
   guardar() {
     this.trx = {
@@ -89,23 +95,67 @@ export class TransactionComponentComponent implements OnInit {
       })
   }
 
-  deleteTras(id:number){
-       this.transactionService.delete(id)
-       .subscribe(data=>{
+  deleteTras(id: number) {
+    this.transactionService.delete(id)
+      .subscribe(data => {
         // this.transactions=this.transactions.filter(t=>t!== id)
-         alert("Transaction Eliminada...");
-       });
-    }
- 
+        alert("Transaction Eliminada...");
+      });
+  }
 
-  actualizarForm(transaction:any) {
+  actualizarEstadoDni() {
+    if (this.trx.dniUsr !== '') {
+      this.trx.estado = this.trx.estado === '1' ? '0' : '1';
+      this.transactionService.updateStateByDni(this.trx)
+        .subscribe(resp => {
+          console.log('Updated: ', resp);
+        })
+    }
+  }
+
+  actualizarForm(transaction: any) {
     console.log(transaction);
+    this.id = transaction.id;
     this.nomUser = transaction.nombreUsr;
     this.apeUser = transaction.apellidoUsr;
     this.dniUser = transaction.dniUsr;
     this.payMethod = transaction.paymentMethod;
+    this.trx.estado = transaction.estado;
 
     this.editando = true;
+  }
+
+  editar() {
+    this.trx = {
+      id: this.id,
+      nombreUsr: this.nomUser,
+      apellidoUsr: this.apeUser,
+      dniUsr: this.dniUser,
+      paymentMethod: this.payMethod,
+    }
+
+    this.transactionService.editTransaction(this.trx)
+    .subscribe({
+      next: (resp) => {
+        console.log('Respuesta ', resp);
+        this.resetearValores();
+        this.obtenerTodas();
+      },
+      error: (respError) => {
+        console.log(respError.error);
+        this.errorMessage = respError.error.errorMessage;
+      },
+    })
+
+  }
+
+  resetearValores(){
+    this.id= 0;
+    this.nomUser = '';
+    this.apeUser = '';
+    this.dniUser = '';
+    this.payMethod = '';
+   this.editando = false;
   }
 
 }

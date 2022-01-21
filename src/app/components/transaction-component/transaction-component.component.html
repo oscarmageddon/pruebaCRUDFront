@@ -28,8 +28,8 @@
                         </div>
                         <div class="error">{{ errorMessage }}</div>
                         <br>
-                        <input type="button" style="margin: 10px" value="Agregar" (click)="guardar()"
-                            class="btn btn-primary">
+                        <input type="button" *ngIf="!editando"  style="margin: 10px" value="Agregar" (click)="guardar()" class="btn btn-primary">
+                        <input type="button" *ngIf="editando"  style="margin: 10px" value="Editar" (click)="editar()" class="btn btn-primary">
                         <input type="button" value="Buscar por Rut" (click)="buscarPorDni()" class="btn btn-primary">
                         <input type="button" style="margin: 10px" value="Habilitar/Inhabilitar"
                             (click)="actualizarEstadoDni()" class="btn btn-primary">
@@ -67,11 +67,11 @@
                     <th scope="row" class="text-center">{{item.id}}</th>
                     <td class="text-center">{{item.nombreUsr}}</td>
                     <td class="text-center">{{item.apellidoUsr}}</td>
-                    <td class="text-center">{{tem. dniUsr}}</td>
+                    <td class="text-center">{{item.dniUsr}}</td>
                     <td class="text-center">{{item.paymentMethod}}</td>
                     <td class="text-center">{{item.estado}}</td>
 
-                    <th class="text-center" scope="col"><input type="button" (click)='actualizarForm(item)' value="Editar" data-bs-toggle="modal"  data-bs-target="#exampleModal" class="btn btn-success"></th>
+                    <th class="text-center" scope="col"><input type="button" (click)='actualizarForm(item)' value="Editar"  class="btn btn-success"></th>
                     <th class="text-center" scope="col"><input type="button" value="Eliminar" class="btn btn-danger">
                     </th>
                 </tr>
