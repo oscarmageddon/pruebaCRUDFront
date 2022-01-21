@@ -38,11 +38,11 @@ export class TransactionService {
   }
 
   delete(id: number) {
+    console.log('deleting', id);
     return this.http.delete<Transaction>(`${this.baseUrl}/${id}`);
   }
 
   editTransaction(trx: Transaction): Observable<Transaction> {
     return this.http.put<Transaction>(`${this.baseUrl}/actualizar/${trx.id}`, trx);
   }
-
 }
