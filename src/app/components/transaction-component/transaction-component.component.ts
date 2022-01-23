@@ -47,21 +47,6 @@ export class TransactionComponentComponent implements OnInit {
     }
 
     this.transactionService.saveTransaction(this.trx)
-<<<<<<< HEAD
-      .subscribe({
-        next: (resp) => console.log('Respuesta ', resp),
-        error: (respError) => {
-        console.log(respError.error);
-        this.errorMessage = respError.error.errorMessage;
-      },
-    })
-
-  }
-
-  buscarPorDni() {
-      this.transactionService.findTransactionByDni(this.dniUser)
-=======
->>>>>>> develop
       .subscribe({
         next: (resp) => console.log('Respuesta ', resp),
         error: (respError) => {
@@ -104,9 +89,4 @@ export class TransactionComponentComponent implements OnInit {
         })
     }
   }
-<<<<<<< HEAD
-
-
-=======
->>>>>>> develop
 }
