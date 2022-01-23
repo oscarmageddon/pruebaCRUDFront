@@ -2,7 +2,6 @@
     <div class="col"></div>
     <div class="col-md-10">
         <div class="row justify-content-md-center">
-
             <h2 class="mt-5">Gestion de Transaccion
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-right" viewBox="0 0 16 16">
                     <path fill-rule="evenodd"
@@ -10,31 +9,29 @@
                 </svg>
             </h2>
         </div>
-
-
         <form>
             <div class="card">
                 <div class="card-body">
                     <div class="mb-3">
                         <br><br>
-                        <input type="text" name="nomUser" class="form-control" [(ngModel)]="nomUser" placeholder="Nombre..." /><br>
-                        <input type="text" name="apeUser" class="form-control" [(ngModel)]="apeUser" placeholder="Apellido..." /><br>
-                        <input type="text" name="dniUser" class="form-control" [(ngModel)]="dniUser" placeholder="Rut..." /><br>
-                        <input type="text" name="payMethod" class="form-control" [(ngModel)]="payMethod" placeholder="Metodo de pago..." /><br>
+                        <input type="text" name="nomUser" class="form-control" [(ngModel)]="trx.nombreUsr" placeholder="Nombre..." /><br>
+                        <input type="text" name="apeUser" class="form-control" [(ngModel)]="trx.apellidoUsr" placeholder="Apellido..." /><br>
+                        <input type="text" name="dniUser" class="form-control" [(ngModel)]="trx.dniUsr" placeholder="Rut..." /><br>
+                        <input type="text" name="payMethod" class="form-control" [(ngModel)]="trx.paymentMethod" placeholder="Metodo de pago..." /><br>
                         <div class="alert alert-{{ trx.estado === '1' ? 'success' : 'danger' }}" role="alert">
                             {{ trx.estado === '1' ? 'Habilitado' : 'Inhabilitado' }}
                         </div>
                         <div class="error">{{ errorMessage }}</div>
                         <br>
-                        <input type="button" style="margin: 10px" value="Agregar" (click)="guardar()" class="btn btn-primary">
-                        <input type="button" style="margin: 10px" value="Buscar por Rut" (click)="buscarPorDni()" class="btn btn-primary">
+                        <input type="button" *ngIf="!editando" style="margin: 10px" value="Agregar" (click)="guardar()" class="btn btn-primary">
+                        <input type="button" *ngIf="editando" style="margin: 10px" value="Editar" (click)="editar()" class="btn btn-primary">
+                        <input type="button" value="Buscar por Rut" (click)="buscarPorDni()" class="btn btn-primary">
                         <input type="button" style="margin: 10px" value="Habilitar/Inhabilitar" (click)="actualizarEstadoDni()" class="btn btn-primary">
 
                     </div>
                 </div>
             </div>
         </form>
-
         <br>
         <div class="row mg-t-12 mg-b-12 mg-l-12 mg-b-10">
             <div class="col-lg-5">
@@ -44,41 +41,57 @@
             </div>
         </div>
         <br>
-        <table class="table table-responsive table-hover">
-            <thead>
-                <tr class="primary">
-                    <th scope="col">ID</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellido</th>
-                    <th scope="col">Rut</th>
-                    <th scope="col">Metodo de Pago</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">
-
-                    </th>
-                    <th scope="col">
-
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-
+        <div id="tabla">
+            <table class="table table-responsive table-hover">
+                <thead>
+                    <tr class="primary">
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Rut</th>
+                        <th scope="col">Metodo de Pago</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">
+                        </th>
+                        <th scope="col">
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
                     <tr *ngFor="let item of transactions">
                         <th scope="row" class="text-center">{{item.id}}</th>
                         <td class="text-center">{{item.nombreUsr}}</td>
                         <td class="text-center">{{item.apellidoUsr}}</td>
+                        <td class="text-center">{{item.dniUsr}}</td>
                         <td class="text-center">{{item.paymentMethod}}</td>
                         <td class="text-center">{{item.estado}}</td>
-
-                        <th class="text-center" scope="col"><input type="button" value="Editar" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success"></th>
-                        <th class="text-center" scope="col"><input type="button" value="Eliminar" class="btn btn-danger"></th>
+                        <th class="text-center" scope="col"><input type="button" (click)='actualizarForm(item)' value="Editar" class="btn btn-success" /></th>
+                        <th class="text-center" scope="col"><input type="button" (click)='getDeleteObj(item)' value="Eliminar" data-bs-toggle="modal" data-bs-target="#eliminar" class="btn btn-danger"></th>
                     </tr>
-
-
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
-
     <div class="col"></div>
+</div>
+<!-- The Modal -->
+<div class="modal" id="eliminar">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Eliminar transacción </h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                ¿Quiere eliminar a {{trx.nombreUsr }} {{trx.apellidoUsr }}?
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button class="btn btn-success" data-bs-dismiss="modal" (click)="delete()">Aceptar</button>
+            </div>
+        </div>
+    </div>
 </div>
