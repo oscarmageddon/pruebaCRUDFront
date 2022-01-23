@@ -21,23 +21,28 @@ export class TransactionService {
     return this.http.get<Transaction>(`${this.baseUrl}/dni/` + dniUsr);
   }
 
-  updateStateByDni(trx: Transaction): Observable<Transaction> {
-    return this.http.put<Transaction>(`${this.baseUrl}/${trx.id}`, trx);
-  }
-
   getAll(): Observable<Array<Transaction>> {
-    return this.http.get<Array<Transaction>>(`${this.baseUrl}/getall`);
+    return this.http.get<Array<Transaction>>(`${this.baseUrl}/`);
   }
 
   getById(id: string): Observable<Transaction> {
     return this.http.get<Transaction>(`${this.baseUrl}/${id}`);
   }
 
-  create(params: any): Observable<Transaction> {
-    return this.http.post<Transaction>(this.baseUrl, params);
+  create(params: any) {
+    return this.http.post(this.baseUrl, params);
   }
 
-  delete(id: string): Observable<any> {
-    return this.http.delete<any>(`${this.baseUrl}/${id}`);
+  updateStateByDni(trx: Transaction): Observable<Transaction> {
+    return this.http.put<Transaction>(`${this.baseUrl}/${trx.id}`, trx);
+  }
+
+  delete(id: number) {
+    console.log('deleting', id);
+    return this.http.delete<Transaction>(`${this.baseUrl}/${id}`);
+  }
+
+  editTransaction(trx: Transaction): Observable<Transaction> {
+    return this.http.put<Transaction>(`${this.baseUrl}/actualizar/${trx.id}`, trx);
   }
 }
