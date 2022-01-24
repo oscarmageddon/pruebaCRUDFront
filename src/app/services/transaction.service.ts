@@ -41,21 +41,13 @@ export class TransactionService {
     return this.http.put<Transaction>(`${this.baseUrl}/${trx.id}`, trx);
   }
   
-  findAll(): Observable<Transaction> {
-  const headers = { 'content-type': 'application/json'};
 
-  return this.http.get<Transaction>(`${ this.baseUrl }/`, {'headers': headers});
-}
+  delete(id: number) {
+    console.log('deleting', id);
+    return this.http.delete<Transaction>(`${this.baseUrl}/${id}`);
+  }
 
-update(trx: Transaction): Observable<Transaction>{
-  const headers = { 'content-type': 'application/json'};
-  const body = JSON.stringify(trx);
-  return this.http.put<Transaction>(`${ this.baseUrl }/`, body, {'headers': headers});
-}
- 
-
-  delete(transactionId: String): Observable<Transaction>{
-    const headers = { 'content-type': 'application/json'};
-    return this.http.delete<Transaction>(`${ this.baseUrl }/`+transactionId, {'headers': headers});
+  editTransaction(trx: Transaction): Observable<Transaction> {
+    return this.http.put<Transaction>(`${this.baseUrl}/actualizar/${trx.id}`, trx);
   }
 }
