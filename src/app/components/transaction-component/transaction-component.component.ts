@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { TransactionService } from '../../services/transaction.service';
 import { Transaction } from '../../interfaces/transaction.interface';
-import { compileNgModuleDeclarationExpression } from '@angular/compiler/src/render3/r3_module_compiler';
 
 
 @Component({
@@ -12,16 +11,14 @@ import { compileNgModuleDeclarationExpression } from '@angular/compiler/src/rend
 
 })
 export class TransactionComponentComponent implements OnInit {
-  
-  transactions: Array<Transaction> = new Array<Transaction>() ;
-
-
+  transactions!: Transaction[];
   nomUser: string = '';
   apeUser: string = '';
   dniUser: string = '';
   payMethod: string = '';
-
+  transaId: string = '';
   errorMessage: any;
+  transactionId: string = '';
 
   trx: Transaction = {
     nombreUsr: '',
@@ -30,16 +27,16 @@ export class TransactionComponentComponent implements OnInit {
     paymentMethod: '',
     estado: '1'
   }
-
+  
+  produc: any[] = [];
 
   constructor(private transactionService: TransactionService,) { }
 
   ngOnInit(): void {
     this.transactionService.getAll()
-      .subscribe(transactions => {
-        this.transactions = transactions;
-        console.log('Transactions', transactions);
-      });
+      .pipe(first())
+      .subscribe(transactions => this.transactions = transactions);
+
   }
 
   guardar() {
@@ -87,13 +84,72 @@ export class TransactionComponentComponent implements OnInit {
       })
   }
 
-  deleteTras(id:number){
-       this.transactionService.delete(id)
-       .subscribe(data=>{
-        // this.transactions=this.transactions.filter(t=>t!== id)
-         alert("Transaction Eliminada...");
-       });
+  actualizarEstadoDni() {
+    if (this.trx.dniUsr !== '') {
+      this.trx.estado = this.trx.estado === '1' ? '0' : '1';
+      this.transactionService.updateStateByDni(this.trx)
+        .subscribe(resp => {
+          console.log('Updated: ', resp);
+        })
     }
+  }
 
-   
+  /* delete(){
+    this.transactionService.delete( item, )
+    .subscribe ( resp => {
+    console.log('Respuesta findBy', resp);
+       this.guardar();
+      
+     })
+  } */
+
+  delete(){
+    this.transactionService.delete( this.transactionId )
+    .subscribe ( resp => {
+      console.log('Respuesta findBy', resp);
+      this.load();
+      
+    })
+  }
+
+  load(){
+    this.transactionService.findAll()
+      .subscribe((data:any)=> this.trx=data)
+ 
+      this.nomUser = "";
+      this.apeUser = "";
+      this.dniUser ="";
+      this.payMethod = "";
+      this.trx = {
+        nombreUsr: "",
+        apellidoUsr: "",
+        dniUsr: "",
+        paymentMethod: "",
+        estado: "",
+        
+        
+      }
+  }
+
+  modificar(){
+    this.trx = {
+
+      nombreUsr: this.nomUser,
+      apellidoUsr: this.apeUser,
+      dniUsr: this.dniUser,
+      paymentMethod: this.payMethod,
+      estado: '1'
+    
+      }
+  
+      this.transactionService.update( this.trx )
+        .subscribe ( resp => {
+          console.log('Respuesta ', resp)
+          this.load();
+        })
+    
+  }
+
+  
+  
 }

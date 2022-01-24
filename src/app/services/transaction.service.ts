@@ -21,12 +21,16 @@ export class TransactionService {
     return this.http.get<Transaction>(`${this.baseUrl}/dni/` + dniUsr);
   }
 
+  deleteStateByDni(trx: Transaction): Observable<Transaction> {
+   return this.http.delete<Transaction>(`${this.baseUrl}/`);
+  }
+
   getAll(): Observable<Array<Transaction>> {
     return this.http.get<Array<Transaction>>(`${this.baseUrl}/`);
   }
 
-  getById(id: string): Observable<Transaction> {
-    return this.http.get<Transaction>(`${this.baseUrl}/${id}`);
+  getById(id: number): Observable<Transaction> {
+    return this.http.get<Transaction>(`${this.baseUrl}/${id}`+ id);
   }
 
   create(params: any) {
@@ -36,8 +40,22 @@ export class TransactionService {
   updateStateByDni(trx: Transaction): Observable<Transaction> {
     return this.http.put<Transaction>(`${this.baseUrl}/${trx.id}`, trx);
   }
+  
+  findAll(): Observable<Transaction> {
+  const headers = { 'content-type': 'application/json'};
 
-  delete(id: number) {
-    return this.http.delete<Transaction>(`${this.baseUrl}/${id}`);
+  return this.http.get<Transaction>(`${ this.baseUrl }/`, {'headers': headers});
+}
+
+update(trx: Transaction): Observable<Transaction>{
+  const headers = { 'content-type': 'application/json'};
+  const body = JSON.stringify(trx);
+  return this.http.put<Transaction>(`${ this.baseUrl }/`, body, {'headers': headers});
+}
+ 
+
+  delete(transactionId: String): Observable<Transaction>{
+    const headers = { 'content-type': 'application/json'};
+    return this.http.delete<Transaction>(`${ this.baseUrl }/`+transactionId, {'headers': headers});
   }
 }

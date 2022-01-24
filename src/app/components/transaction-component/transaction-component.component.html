@@ -66,13 +66,14 @@
                     <th scope="row" class="text-center">{{item.id}}</th>
                     <td class="text-center">{{item.nombreUsr}}</td>
                     <td class="text-center">{{item.apellidoUsr}}</td>
-                    <td class="text-center">{{tem. dniUsr}}</td>
+                    <td class="text-center">{{item. dniUsr}}</td>
                     <td class="text-center">{{item.paymentMethod}}</td>
                     <td class="text-center">{{item.estado}}</td>
-
-                    <th class="text-center" scope="col"><input type="button" value="Editar" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal" class="btn btn-success"></th>
-                    <th class="text-center" scope="col"><input type="button" value="Eliminar" class="btn btn-danger">
+                    <th class="text-center" scope="col">
+                        <input type="button" value="Editar" data-bs-toggle="modal" data-bs-toggle="modal" data-bs-target="#editar" class="btn btn-success">
+                    </th>
+                    <th class="text-center" scope="col">
+                        <input type="button"  value="Eliminar" data-bs-toggle="modal" data-bs-target="#eliminar" class="btn btn-danger">  
                     </th>
                 </tr>
             </tbody>
@@ -80,23 +81,76 @@
     </div>
     <div class="col"></div>
 </div>
-<!-- The Modal -->
+
+<!-- The Modal  ELIMINAR-->
 <div class="modal" id="eliminar">
     <div class="modal-dialog">
         <div class="modal-content">
+
             <!-- Modal Header -->
             <div class="modal-header">
                 <h4 class="modal-title">Eliminar transacción </h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
+
             <!-- Modal body -->
             <div class="modal-body">
                 ¿Quiere eliminar transacción?
             </div>
+
             <!-- Modal footer -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button class="btn btn-success" data-bs-dismiss="modal" >Aceptar</button>
+                <button class="btn btn-success" data-bs-dismiss="modal" type="submit" >Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- The Modal  Editar-->
+<div class="modal" id="editar">
+    <div class="modal-dialog modal-lg" >
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Modificar Transacción </h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <br><br>
+                            <input type="text" name="nomUser" class="form-control" [(ngModel)]="nomUser"
+                                placeholder="Nombre..." /><br>
+                            <input type="text" name="apeUser" class="form-control" [(ngModel)]="apeUser"
+                                placeholder="Apellido..." /><br>
+                            <input type="text" name="dniUser" class="form-control" [(ngModel)]="dniUser"
+                                placeholder="Rut..." /><br>
+                            <input type="text" name="payMethod" class="form-control" [(ngModel)]="payMethod"
+                                placeholder="Metodo de pago..." /><br>
+                            <div class="alert alert-{{ trx.estado === '1' ? 'success' : 'danger' }}" role="alert">
+                                {{ trx.estado === '1' ? 'Habilitado' : 'Inhabilitado' }}
+                            </div>
+                            <div class="error">{{ errorMessage }}</div>
+                            <br>
+                            <input type="button" style="margin: 10px" value="Agregar" (click)="guardar()"
+                                class="btn btn-primary">
+                            <input type="button" value="Buscar por Rut" (click)="buscarPorDni()" class="btn btn-primary">
+                            <input type="button" style="margin: 10px" value="Habilitar/Inhabilitar"
+                                (click)="actualizarEstadoDni()" class="btn btn-primary">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button class="btn btn-success" data-bs-dismiss="modal"  >Aceptar</button>
             </div>
         </div>
     </div>
