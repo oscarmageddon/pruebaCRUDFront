@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { TransactionService } from '../../services/transaction.service';
 import { Transaction } from '../../interfaces/transaction.interface';
@@ -37,12 +37,16 @@ export class TransactionComponentComponent implements OnInit {
         this.transactions = transactions;
         console.log('Transactions', transactions);
       });
+      
   }
 
   guardar() {
     this.transactionService.saveTransaction(this.trx)
       .subscribe({
-        next: (resp) => console.log('Respuesta ', resp),
+        next: (resp) => {
+          console.log('Respuesta ', resp);
+          this.obtenerTodas();
+        },
         error: (respError) => {
           console.log(respError.error);
           this.errorMessage = respError.error.errorMessage;
@@ -73,8 +77,9 @@ export class TransactionComponentComponent implements OnInit {
 
   delete() {
     this.transactionService.delete(this.trx.id)
-      .subscribe();
-      this.obtenerTodas();
+      .subscribe(resp => {
+        this.obtenerTodas();
+      });
   }
 
   getDeleteObj(tr: Transaction) {
@@ -127,7 +132,8 @@ export class TransactionComponentComponent implements OnInit {
       dniUsr: '',
       paymentMethod: '',
       estado: '1'
-    }
+    };
+    this.editando = false;
   }
 
 }
