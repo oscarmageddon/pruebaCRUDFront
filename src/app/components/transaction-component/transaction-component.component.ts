@@ -46,6 +46,7 @@ export class TransactionComponentComponent implements OnInit {
         next: (resp) => {
           console.log('Respuesta ', resp);
           this.obtenerTodas();
+          this.errorMessage = "";
         },
         error: (respError) => {
           console.log(respError.error);
@@ -68,7 +69,8 @@ export class TransactionComponentComponent implements OnInit {
             paymentMethod: resp.paymentMethod,
             estado: resp.estado,
             id: resp.id
-          }
+          };
+          this.errorMessage = "";
         },
         error: (respError) => {
           console.log(respError.error);
@@ -94,6 +96,7 @@ export class TransactionComponentComponent implements OnInit {
       this.transactionService.updateStateByDni(this.trx)
         .subscribe(resp => {
           console.log('Updated: ', resp);
+          this.errorMessage = "";
         });
     }
   }
@@ -137,5 +140,6 @@ export class TransactionComponentComponent implements OnInit {
       estado: '1'
     };
     this.editando = false;
+    this.errorMessage = "";
   }
 }
