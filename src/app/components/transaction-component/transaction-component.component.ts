@@ -54,6 +54,8 @@ export class TransactionComponentComponent implements OnInit {
       });
   }
 
+  // Creado por Mario Tigua
+  // Función que permite buscar una transacción dado su dni y llenar el formulario con los datos de la transaccíon encontrada
   buscarPorDni() {
     this.transactionService.findTransactionByDni(this.trx.dniUsr)
       .subscribe({
@@ -108,6 +110,7 @@ export class TransactionComponentComponent implements OnInit {
     }
     this.editando = true;
   }
+
 
   editar() {
     this.transactionService.editTransaction(this.trx)
