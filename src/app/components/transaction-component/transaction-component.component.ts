@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { TransactionService } from '../../services/transaction.service';
 import { Transaction } from '../../interfaces/transaction.interface';
+import { compileNgModuleDeclarationExpression } from '@angular/compiler/src/render3/r3_module_compiler';
 
 @Component({
   selector: 'app-transaction-component',
@@ -14,7 +15,6 @@ export class TransactionComponentComponent implements OnInit {
   transactions: Array<Transaction> = new Array<Transaction>();
   editando: boolean = false;
   errorMessage: any;
-  transactionId: string = '';
 
   trx: Transaction = {
     id: 0,
@@ -30,7 +30,8 @@ export class TransactionComponentComponent implements OnInit {
   ngOnInit(): void {
     this.obtenerTodas();
   }
-
+   // Indira Navas
+  // Nos permite listar en la tabla las transacciones guardas en BD Supervisado Oscar Campos
   obtenerTodas() {
     this.transactionService.getAll()
       .subscribe(transactions => {
@@ -39,21 +40,24 @@ export class TransactionComponentComponent implements OnInit {
       });
       
   }
-
+  // Oscar Campos
   guardar() {
     this.transactionService.saveTransaction(this.trx)
       .subscribe({
         next: (resp) => {
-          console.log('Respuesta ', resp);
           this.obtenerTodas();
+          this.resetearValores();
         },
         error: (respError) => {
           console.log(respError.error);
           this.errorMessage = respError.error.errorMessage;
+          this.resetearValores();
         },
       });
   }
 
+  // Creado por Mario Tigua
+  // Función que permite buscar una transacción dado su dni y llenar el formulario con los datos de la transaccíon encontrada
   buscarPorDni() {
     this.transactionService.findTransactionByDni(this.trx.dniUsr)
       .subscribe({
@@ -66,7 +70,8 @@ export class TransactionComponentComponent implements OnInit {
             paymentMethod: resp.paymentMethod,
             estado: resp.estado,
             id: resp.id
-          }
+          };
+          this.errorMessage = "";
         },
         error: (respError) => {
           console.log(respError.error);
@@ -74,14 +79,16 @@ export class TransactionComponentComponent implements OnInit {
         },
       });
   }
-
+  // Indira Navas
+  // Nos permite eliminar por id y actualiza  las transacciones guardas en BD Supervisado Oscar Campos
   delete() {
     this.transactionService.delete(this.trx.id)
       .subscribe(resp => {
+        this.resetearValores();
         this.obtenerTodas();
       });
   }
-
+   // Indira Navas Supervisado Oscar Campos
   getDeleteObj(tr: Transaction) {
     this.trx = tr;
   }
@@ -92,10 +99,13 @@ export class TransactionComponentComponent implements OnInit {
       this.transactionService.updateStateByDni(this.trx)
         .subscribe(resp => {
           console.log('Updated: ', resp);
+          this.obtenerTodas();
+          this.errorMessage = "";
         });
     }
   }
-
+  // Indira Navas
+  // Nos permite actualizar las transacciones guardas en BD Supervisado Oscar Campos
   actualizarForm(transaction: any) {
     console.log(transaction);
     this.trx = {
@@ -108,7 +118,7 @@ export class TransactionComponentComponent implements OnInit {
     }
     this.editando = true;
   }
-
+  //  E.C "Se Agrega Funcion de editar"
   editar() {
     this.transactionService.editTransaction(this.trx)
       .subscribe({
@@ -123,7 +133,9 @@ export class TransactionComponentComponent implements OnInit {
         },
       })
   }
-
+  
+  // Indira Navas
+  // Nos permite  la actualizacion las transacciones guardas en BD Supervisado Oscar Campos
   resetearValores() {
     this.trx = {
       id: 0,
@@ -134,5 +146,6 @@ export class TransactionComponentComponent implements OnInit {
       estado: '1'
     };
     this.editando = false;
+    this.errorMessage = "";
   }
 }

@@ -17,20 +17,18 @@ export class TransactionService {
     return this.http.post<Transaction>(`${this.baseUrl}/`, trx);
   }
 
+  // Creado por Mario Tigua
+  // Función que permite llamar al backend para obtener una transacción dado su dni
   findTransactionByDni(dniUsr: String): Observable<Transaction> {
     return this.http.get<Transaction>(`${this.baseUrl}/dni/` + dniUsr);
-  }
-
-  deleteStateByDni(trx: Transaction): Observable<Transaction> {
-   return this.http.delete<Transaction>(`${this.baseUrl}/`);
   }
 
   getAll(): Observable<Array<Transaction>> {
     return this.http.get<Array<Transaction>>(`${this.baseUrl}/`);
   }
 
-  getById(id: number): Observable<Transaction> {
-    return this.http.get<Transaction>(`${this.baseUrl}/${id}`+ id);
+  getById(id: string): Observable<Transaction> {
+    return this.http.get<Transaction>(`${this.baseUrl}/${id}`);
   }
 
   create(params: any) {
@@ -40,7 +38,6 @@ export class TransactionService {
   updateStateByDni(trx: Transaction): Observable<Transaction> {
     return this.http.put<Transaction>(`${this.baseUrl}/${trx.id}`, trx);
   }
-  
 
   delete(id: number) {
     console.log('deleting', id);
