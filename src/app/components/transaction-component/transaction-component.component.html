@@ -44,15 +44,15 @@
             <table class="table table-responsive table-hover">
                 <thead>
                     <tr class="primary">
-                        <th scope="col">ID</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Apellido</th>
-                        <th scope="col">Rut</th>
-                        <th scope="col">Metodo de Pago</th>
-                        <th scope="col">Estado</th>
-                        <th scope="col">
+                        <th class="text-center" scope="col">ID</th>
+                        <th class="text-center" scope="col">Nombre</th>
+                        <th class="text-center" scope="col">Apellido</th>
+                        <th class="text-center" scope="col">Rut</th>
+                        <th class="text-center" scope="col">Metodo de Pago</th>
+                        <th class="text-center" scope="col">Estado</th>
+                        <th class="text-center" scope="col">
                         </th>
-                        <th scope="col">
+                        <th class="text-center" scope="col">
                         </th>
                     </tr>
                 </thead>
@@ -63,7 +63,7 @@
                         <td class="text-center">{{item.apellidoUsr}}</td>
                         <td class="text-center">{{item.dniUsr}}</td>
                         <td class="text-center">{{item.paymentMethod}}</td>
-                        <td class="text-center">{{item.estado}}</td>
+                        <td class="text-center">{{ item.estado === '1' ? 'Habilitado' : 'Inhabilitado' }}</td>
                         <th class="text-center" scope="col"><input type="button" (click)='actualizarForm(item)' value="Editar" class="btn btn-success" /></th>
                         <th class="text-center" scope="col"><input type="button" (click)='getDeleteObj(item)' value="Eliminar" data-bs-toggle="modal" data-bs-target="#eliminar" class="btn btn-danger"></th>
                     </tr>

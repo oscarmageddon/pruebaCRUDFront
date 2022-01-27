@@ -39,17 +39,18 @@ export class TransactionComponentComponent implements OnInit {
       });
       
   }
-
+  // Oscar Campos
   guardar() {
     this.transactionService.saveTransaction(this.trx)
       .subscribe({
         next: (resp) => {
-          console.log('Respuesta ', resp);
           this.obtenerTodas();
+          this.resetearValores();
         },
         error: (respError) => {
           console.log(respError.error);
           this.errorMessage = respError.error.errorMessage;
+          this.resetearValores();
         },
       });
   }
@@ -92,6 +93,7 @@ export class TransactionComponentComponent implements OnInit {
       this.transactionService.updateStateByDni(this.trx)
         .subscribe(resp => {
           console.log('Updated: ', resp);
+          this.obtenerTodas();
         });
     }
   }
