@@ -39,18 +39,18 @@ export class TransactionComponentComponent implements OnInit {
       });
       
   }
-
+  // Oscar Campos
   guardar() {
     this.transactionService.saveTransaction(this.trx)
       .subscribe({
         next: (resp) => {
-          console.log('Respuesta ', resp);
           this.obtenerTodas();
-          this.errorMessage = "";
+          this.resetearValores();
         },
         error: (respError) => {
           console.log(respError.error);
           this.errorMessage = respError.error.errorMessage;
+          this.resetearValores();
         },
       });
   }
@@ -82,6 +82,7 @@ export class TransactionComponentComponent implements OnInit {
   delete() {
     this.transactionService.delete(this.trx.id)
       .subscribe(resp => {
+        this.resetearValores();
         this.obtenerTodas();
       });
   }
@@ -96,6 +97,7 @@ export class TransactionComponentComponent implements OnInit {
       this.transactionService.updateStateByDni(this.trx)
         .subscribe(resp => {
           console.log('Updated: ', resp);
+          this.obtenerTodas();
           this.errorMessage = "";
         });
     }
@@ -113,8 +115,7 @@ export class TransactionComponentComponent implements OnInit {
     }
     this.editando = true;
   }
-
-
+  //  E.C "Se Agrega Funcion de editar"
   editar() {
     this.transactionService.editTransaction(this.trx)
       .subscribe({
