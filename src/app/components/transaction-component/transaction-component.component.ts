@@ -30,7 +30,8 @@ export class TransactionComponentComponent implements OnInit {
   ngOnInit(): void {
     this.obtenerTodas();
   }
-
+   // Indira Navas
+  // Nos permite listar en la tabla las transacciones guardas en BD Supervisado Oscar Campos
   obtenerTodas() {
     this.transactionService.getAll()
       .subscribe(transactions => {
@@ -78,7 +79,8 @@ export class TransactionComponentComponent implements OnInit {
         },
       });
   }
-
+  // Indira Navas
+  // Nos permite eliminar por id y actualiza  las transacciones guardas en BD Supervisado Oscar Campos
   delete() {
     this.transactionService.delete(this.trx.id)
       .subscribe(resp => {
@@ -86,7 +88,7 @@ export class TransactionComponentComponent implements OnInit {
         this.obtenerTodas();
       });
   }
-
+   // Indira Navas Supervisado Oscar Campos
   getDeleteObj(tr: Transaction) {
     this.trx = tr;
   }
@@ -102,7 +104,8 @@ export class TransactionComponentComponent implements OnInit {
         });
     }
   }
-
+  // Indira Navas
+  // Nos permite actualizar las transacciones guardas en BD Supervisado Oscar Campos
   actualizarForm(transaction: any) {
     console.log(transaction);
     this.trx = {
@@ -130,7 +133,9 @@ export class TransactionComponentComponent implements OnInit {
         },
       })
   }
-
+  
+  // Indira Navas
+  // Nos permite  la actualizacion las transacciones guardas en BD Supervisado Oscar Campos
   resetearValores() {
     this.trx = {
       id: 0,
