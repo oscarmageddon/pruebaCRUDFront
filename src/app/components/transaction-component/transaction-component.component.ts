@@ -79,6 +79,7 @@ export class TransactionComponentComponent implements OnInit {
   delete() {
     this.transactionService.delete(this.trx.id)
       .subscribe(resp => {
+        this.resetearValores();
         this.obtenerTodas();
       });
   }
@@ -110,7 +111,7 @@ export class TransactionComponentComponent implements OnInit {
     }
     this.editando = true;
   }
-
+  //  E.C "Se Agrega Funcion de editar"
   editar() {
     this.transactionService.editTransaction(this.trx)
       .subscribe({
