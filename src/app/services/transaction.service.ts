@@ -17,6 +17,8 @@ export class TransactionService {
     return this.http.post<Transaction>(`${this.baseUrl}/`, trx);
   }
 
+  // Creado por Mario Tigua
+  // Función que permite llamar al backend para obtener una transacción dado su dni
   findTransactionByDni(dniUsr: String): Observable<Transaction> {
     return this.http.get<Transaction>(`${this.baseUrl}/dni/` + dniUsr);
   }
