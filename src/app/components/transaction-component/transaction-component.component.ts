@@ -51,7 +51,8 @@ export class TransactionComponentComponent implements OnInit {
         error: (respError) => {
           console.log(respError.error);
           this.errorMessage = respError.error.errorMessage;
-          this.resetearValores();
+          console.log('En el error');
+          console.log(respError.error.errorMessage);
         },
       });
   }
@@ -117,6 +118,7 @@ export class TransactionComponentComponent implements OnInit {
       estado: transaction.estado
     }
     this.editando = true;
+    this.errorMessage = "";
   }
   //  E.C "Se Agrega Funcion de editar"
   editar() {
@@ -126,6 +128,7 @@ export class TransactionComponentComponent implements OnInit {
           console.log('Respuesta ', resp);
           this.resetearValores();
           this.obtenerTodas();
+          this.errorMessage = "";
         },
         error: (respError) => {
           console.log(respError.error);
@@ -146,6 +149,5 @@ export class TransactionComponentComponent implements OnInit {
       estado: '1'
     };
     this.editando = false;
-    this.errorMessage = "";
   }
 }
