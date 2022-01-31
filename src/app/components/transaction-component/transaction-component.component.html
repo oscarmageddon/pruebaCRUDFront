@@ -22,10 +22,10 @@
                 <div class="card-body">
                     <div class="mb-3">
                         <br><br>
-                        <input type="text" name="nomUser" class="form-control" [(ngModel)]="trx.nombreUsr" placeholder="Nombre..." /><br>
-                        <input type="text" name="apeUser" class="form-control" [(ngModel)]="trx.apellidoUsr" placeholder="Apellido..." /><br>
-                        <input type="text" name="dniUser" class="form-control" [(ngModel)]="trx.dniUsr" placeholder="Rut..." /><br>
-                        <input type="text" name="payMethod" class="form-control" [(ngModel)]="trx.paymentMethod" placeholder="Metodo de pago..." /><br>
+                        <input type="text" name="nomUser" class="form-control" [(ngModel)]="trx.nombreUsr" placeholder="*Nombre..." /><br>
+                        <input type="text" name="apeUser" class="form-control" [(ngModel)]="trx.apellidoUsr" placeholder="*Apellido..." /><br>
+                        <input type="text" name="dniUser" class="form-control" [(ngModel)]="trx.dniUsr" placeholder="*Rut..." /><br>
+                        <input type="text" name="payMethod" class="form-control" [(ngModel)]="trx.paymentMethod" placeholder="*Metodo de pago..." /><br>
                         <div class="alert alert-{{ trx.estado === '1' ? 'success' : 'danger' }}" role="alert">
                             {{ trx.estado === '1' ? 'Habilitado' : 'Inhabilitado' }}
                         </div>

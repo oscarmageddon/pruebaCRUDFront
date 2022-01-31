@@ -47,6 +47,7 @@ export class TransactionComponentComponent implements OnInit {
         next: (resp) => {
           this.obtenerTodas();
           this.resetearValores();
+          this.errorMessage = "";
         },
         error: (respError) => {
           console.log(respError.error);
@@ -72,6 +73,7 @@ export class TransactionComponentComponent implements OnInit {
             estado: resp.estado,
             id: resp.id
           };
+          this.editando = true;
           this.errorMessage = "";
         },
         error: (respError) => {
@@ -94,6 +96,7 @@ export class TransactionComponentComponent implements OnInit {
     this.trx = tr;
   }
 
+  // Moises (Habilitar / Inhabilitar , supervisado por Oscar)
   actualizarEstadoDni() {
     if (this.trx.dniUsr !== '') {
       this.trx.estado = this.trx.estado === '1' ? '0' : '1';
@@ -105,7 +108,7 @@ export class TransactionComponentComponent implements OnInit {
         });
     }
   }
-  // Indira Navas
+  // E.C 
   // Nos permite actualizar las transacciones guardas en BD Supervisado Oscar Campos
   actualizarForm(transaction: any) {
     console.log(transaction);
@@ -120,7 +123,7 @@ export class TransactionComponentComponent implements OnInit {
     this.editando = true;
     this.errorMessage = "";
   }
-  //  E.C "Se Agrega Funcion de editar"
+  //  E.C "Ocupa la funcion de editar que esta en el backend"
   editar() {
     this.transactionService.editTransaction(this.trx)
       .subscribe({
